@@ -15,14 +15,14 @@ class DictionaryCubit extends Cubit<DictionaryState>{
     print("WordSearchingState() fatched");
 
     try {
-      final word = await _repository.getWordsFromDictionary(queryController.text);
+      final words = await _repository.getWordsFromDictionary(queryController.text);
 
       // ignore: unnecessary_null_comparison
-      if(word == null){
+      if(words == null){
         emit(ErrorState("There is some issue."));
       }else{
-        print(word.toString());
-        emit(WordSearchedState(word.cast<WordResponse>()));
+        print(words.toString());
+        emit(WordSearchedState(words));
         NoWordSearchedState();
       }
     } on Exception catch (e) {
@@ -45,8 +45,8 @@ class WordSearchingState extends DictionaryState{
 }
 
 class WordSearchedState extends DictionaryState{
-  final List<WordResponse> word;
-  WordSearchedState(this.word);
+  final List<WordResponse> words;
+  WordSearchedState(this.words);
 }
 
 class ErrorState extends DictionaryState{
