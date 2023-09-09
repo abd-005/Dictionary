@@ -32,6 +32,7 @@ class WordResponse {
   );
 
   Map<String, dynamic> toJson() => {
+
     "word": word,
     "phonetic": phonetic,
     "phonetics": List<dynamic>.from(phonetics.map((x) => x.toJson())),
